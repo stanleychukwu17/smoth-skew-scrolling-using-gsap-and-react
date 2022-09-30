@@ -1,4 +1,5 @@
 // import { gsap } from 'gsap';
+import useWindowSize from '../../hooks/useWindowSize';
 
 import './app.scss';
 
@@ -13,13 +14,15 @@ import img6 from '../../assets/6.jpg'
 const images: string[] = [img1, img2, img3, img4, img5, img6]
 
 const App = () => {
+    const {width, height} = useWindowSize();
+
+    // console.log(width, height)
 
     return (
         <div className="AppMain">
             <div className="topBar">STANLEY TO</div>
             {
                 images.map((echItem, index) => {
-                    console.log(echItem)
                     return (
                         <div className="bthCvr" key={index}>
                             <div className="imgCvr">

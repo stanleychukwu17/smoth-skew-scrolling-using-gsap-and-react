@@ -21,16 +21,15 @@ body {
     .bthCvr {
         width: clamp(450px, 750px , 80%);
         margin: 0 auto;
-
-        
         &:nth-child(1) {
             margin-top: -100px;
         }
 
+
         .imgCvr {
             @include u1.block_display();
             margin: 180px 0;
-            padding: 10px;
+            padding: 13px;
 
             img {
                 position: relative;
