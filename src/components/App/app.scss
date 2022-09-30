@@ -9,10 +9,14 @@ body {
 }
 .AppMain {
     @include u1.block_display();
-
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
     .topBar {
-        padding: 40px 0 0;
+        padding: 80px 0 0;
         text-align: center;
         font-size: u1.rem(50);
         font-weight: 800;
@@ -22,7 +26,7 @@ body {
         width: clamp(450px, 750px , 80%);
         margin: 0 auto;
         &:nth-child(1) {
-            margin-top: -100px;
+            margin-top: -140px;
         }
 
 

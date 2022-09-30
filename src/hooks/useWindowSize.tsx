@@ -4,7 +4,7 @@ interface windowDetails {
     width: number;
     height: number;
 }
-// 
+// returns the user's window height and width
 const getWindowSize = (): windowDetails => {
     return {
         width: window.innerWidth,
