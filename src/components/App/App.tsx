@@ -14,6 +14,14 @@ import { useEffect, useRef } from 'react';
 
 const images: string[] = [img1, img2, img3, img4, img5, img6]
 
+// the configuration for the skewing and smooth-scrolling
+const skewConfigs = {
+    ease: .1,
+    current: 0,
+    previous: 0,
+    rounded: 0
+}
+
 const App = () => {
     const appRef = useRef<HTMLDivElement>({} as HTMLDivElement)
     const scrollParentRef = useRef<HTMLDivElement>({} as HTMLDivElement)
