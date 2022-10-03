@@ -29,15 +29,15 @@ const App = () => {
     const scrollParentRef = useRef<HTMLDivElement>({} as HTMLDivElement)
     const {width: windowWidth, height: windowHeight} = useWindowSize();
 
-
     // we want to automatically update the height of the body to the scroll container height anytime the window height changes
     useEffect(() => {
         // teacher did:
         document.body.style.height = `${scrollParentRef.current.getBoundingClientRect().height}px`
-        // document.querySelector('body')!.style.color = 'green'
         // console.log(height, scrollParentRef.current.getBoundingClientRect())
-    }, [windowHeight])
 
+        // we could have done this as well:
+        // document.querySelector('body')!.style.height = `${scrollParentRef.current.getBoundingClientRect().height}px`
+    }, [windowHeight])
 
     useEffect(() => {
         requestAnimationFrame(() => skewScrolling())
