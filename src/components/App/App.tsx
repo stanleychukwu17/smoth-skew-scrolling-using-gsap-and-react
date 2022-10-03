@@ -1,6 +1,6 @@
-// import { gsap } from 'gsap';
 import useWindowSize from '../../hooks/useWindowSize';
 
+// importing of stylesheet
 import './app.scss';
 
 // importing of assets
@@ -10,7 +10,7 @@ import img3 from '../../assets/3.jpg'
 import img4 from '../../assets/4.jpg'
 import img5 from '../../assets/5.jpg'
 import img6 from '../../assets/6.jpg'
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 const images: string[] = [img1, img2, img3, img4, img5, img6]
 
@@ -22,8 +22,6 @@ const skewConfigs = {
     rounded: 0
 }
 
-
-
 const App = () => {
     const appRef = useRef<HTMLDivElement>({} as HTMLDivElement)
     const scrollParentRef = useRef<HTMLDivElement>({} as HTMLDivElement)
@@ -33,17 +31,12 @@ const App = () => {
     useEffect(() => {
         // teacher did:
         document.body.style.height = `${scrollParentRef.current.getBoundingClientRect().height}px`
-        // console.log(height, scrollParentRef.current.getBoundingClientRect())
 
         // we could have done this as well:
         // document.querySelector('body')!.style.height = `${scrollParentRef.current.getBoundingClientRect().height}px`
     }, [windowHeight])
 
-    useEffect(() => {
-        requestAnimationFrame(() => skewScrolling())
-    }, [])
-
-    const skewScrolling = () => {
+    const skewScrolling = useCallback(() => {
         skewConfigs.current = window.scrollY
         skewConfigs.previous += (skewConfigs.current - skewConfigs.previous) * skewConfigs.ease
         skewConfigs.rounded = Math.round(skewConfigs.previous * 100) / 100
@@ -54,10 +47,14 @@ const App = () => {
         const velocity = +acceleration
         const skew = velocity * 7.5;
 
-        console.log('calling', skewConfigs)
         scrollParentRef.current.style.transform = `translate3d(0,-${skewConfigs.rounded}px,0) skewY(${skew}deg)`
         requestAnimationFrame(() => skewScrolling())
-    }
+    }, [])
+
+    useEffect(() => {
+        requestAnimationFrame(() => skewScrolling())
+    }, [skewScrolling])
+
 
     return (
         <div className="AppMain" ref={appRef}>
