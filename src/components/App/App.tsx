@@ -84,9 +84,9 @@ const App = () => {
                                 <div className="imgCvr">
                                     <img src={echItem} alt="People" />
                                 </div>
-                                    <div className="h2Cvr">
-                                        <h2>Skew <span className="outline">Scrolling</span></h2>
-                                    </div>
+                                <div className="h2Cvr">
+                                    <h2>Skew <span className="outline">Scrolling</span></h2>
+                                </div>
                             </div>
                         )
                     })
