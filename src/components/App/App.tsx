@@ -16,23 +16,48 @@ const images: string[] = [img1, img2, img3, img4, img5, img6]
 
 // the configuration for the skewing and smooth-scrolling
 const skewConfigs = {
-    ease: .1,
+    ease: .05,
     current: 0,
     previous: 0,
     rounded: 0
 }
 
+
+
 const App = () => {
     const appRef = useRef<HTMLDivElement>({} as HTMLDivElement)
     const scrollParentRef = useRef<HTMLDivElement>({} as HTMLDivElement)
-    const {height} = useWindowSize();
+    const {width: windowWidth, height: windowHeight} = useWindowSize();
+
 
     // we want to automatically update the height of the body to the scroll container height anytime the window height changes
     useEffect(() => {
         // teacher did:
         document.body.style.height = `${scrollParentRef.current.getBoundingClientRect().height}px`
+        // document.querySelector('body')!.style.color = 'green'
         // console.log(height, scrollParentRef.current.getBoundingClientRect())
-    }, [height])
+    }, [windowHeight])
+
+
+    useEffect(() => {
+        requestAnimationFrame(() => skewScrolling())
+    }, [])
+
+    const skewScrolling = () => {
+        skewConfigs.current = window.scrollY
+        skewConfigs.previous += (skewConfigs.current - skewConfigs.previous) * skewConfigs.ease
+        skewConfigs.rounded = Math.round(skewConfigs.previous * 100) / 100
+
+        // variables
+        const difference = skewConfigs.current - skewConfigs.rounded
+        const acceleration = difference / windowWidth
+        const velocity = +acceleration
+        const skew = velocity * 7.5;
+
+        console.log('calling', skewConfigs)
+        scrollParentRef.current.style.transform = `translate3d(0,-${skewConfigs.rounded}px,0) skewY(${skew}deg)`
+        requestAnimationFrame(() => skewScrolling())
+    }
 
     return (
         <div className="AppMain" ref={appRef}>
