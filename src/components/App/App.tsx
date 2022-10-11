@@ -63,7 +63,7 @@ const App = () => {
         // updates the scroll position of the scroll-container and also adds the skew effect
         scrollParentRef.current.style.transform = `translate3d(0,-${skewConfigs.rounded}px,0) skewY(${skew}deg)`
         requestAnimationFrame(() => smoothSkewFunc())
-    }, [])
+    }, [windowWidth])
 
     // allows the page to load before we call the smoothSkewScrolling() function
     useEffect(() => {
