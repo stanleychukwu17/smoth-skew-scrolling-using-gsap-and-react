@@ -70,7 +70,6 @@ const App = () => {
         requestAnimationFrame(() => smoothSkewFunc())
     }, [smoothSkewFunc])
 
-
     return (
         // the App main is styled so the the App is not scrollable, check out the css styling of .AppMain and .scrollParent
         <div className="AppMain" ref={appRef}>
