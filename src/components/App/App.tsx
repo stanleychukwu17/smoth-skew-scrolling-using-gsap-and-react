@@ -1,3 +1,5 @@
+// custom hook that updates anytime the width or height of the viewport changes
+import { useCallback, useEffect, useRef } from 'react';
 import useWindowSize from '../../hooks/useWindowSize';
 
 // importing of stylesheet
@@ -13,14 +15,13 @@ import img6 from '../../assets/6.jpg'
 import img7 from '../../assets/1.jpg'
 import img8 from '../../assets/2.jpg'
 import img9 from '../../assets/3.jpg'
-import { useCallback, useEffect, useRef } from 'react';
 
 const images: string[] = [img1, img2, img3, img4, img5, img6, img7, img8, img9]
 
 // the configuration for the skewing and smooth-scrolling
 const skewConfigs = {
     ease: .05, // the higher this number, the lesser the skew, try 0.5 and see, then try 0.1
-    current: 0, // the current window.scrollY position of the user
+    current: 0, // the current window.scrollY position of the user (where scrollY is the total distance scrolled)
     previous: 0, // the (current - previous) * ease
     rounded: 0 // the Math.round(previous)
 }
@@ -60,7 +61,7 @@ const App = () => {
         const velocity = +acceleration // the higher the velocity of the user scrolling, the higher the skewing
         const skew = velocity * 7.5; // if you also increase the 7.5 value, it increases the skewing effect
 
-        // updates the scroll position of the scroll-container and also adds the skew effect
+        // updates the scroll position of the scroll-container and also adds the skew effect. the translate3d is for smooth scrolling, the skewY is for the skew effect
         scrollParentRef.current.style.transform = `translate3d(0,-${skewConfigs.rounded}px,0) skewY(${skew}deg)`
         requestAnimationFrame(() => smoothSkewFunc())
     }, [windowWidth])
